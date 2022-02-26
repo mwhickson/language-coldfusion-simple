@@ -18,3 +18,7 @@ A simple/barebones ColdFusion grammar for the Atom editor.
 
 * **CFML Grammar for Atom**
   * https://github.com/atuttle/atom-language-cfml
+
+## Screenshot
+
+![sample screenshot](screenshot.png)
