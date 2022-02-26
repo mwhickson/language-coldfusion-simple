@@ -1,0 +1,13 @@
+{
+  "name": "language-coldfusion-simple",
+  "version": "0.0.1",
+  "description": "A simple/barebones ColdFusion grammar for the Atom editor.",
+  "keywords": [
+  ],
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

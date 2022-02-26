@@ -1,0 +1,262 @@
+'scopeName': 'source.cfscript'
+'name': 'cfscript'
+'fileTypes': [
+  'cfc'
+]
+'patterns': [
+
+    #
+    # TODO: clean this up with a repository, etc.
+    #
+
+    # comments
+    {
+      'name': 'comment.cfscript'
+      'begin': '//'
+      'end': '$'
+    }
+    {
+      'name': 'comment.cfscript'
+      'begin': '/\\*'
+      'end': '\\*/'
+    }
+
+    # brackets, braces, and parentheses
+    {
+      'name': 'meta.brace'
+      'match': '{|}|\\(|\\)|\\[|\\]'
+    }
+
+    # delimiters, terminators
+    {
+      'name': 'meta.delimiter'
+      'match': '\\.|,'
+    }
+    {
+      'name': 'punctuation.terminator'
+      'match': '\\;'
+    }
+
+    # digits (decimal, binary, octal, hex)
+    {
+      'name': 'constant.numeric'
+      'match': '''(?x)
+          (?<!\\$)(?:
+            (?:\\b[0-9]+(?:_[0-9]+)*\\.[0-9]+(?:_[0-9]+)*[eE][+-]?[0-9]+(?:_[0-9]+)*\\b)|   # 1.1E+3
+            (?:\\b[0-9]+(?:_[0-9]+)*\\.[eE][+-]?[0-9]+(?:_[0-9]+)*\\b)|                     # 1.E+3
+            (?:\\B\\.[0-9]+(?:_[0-9]+)*[eE][+-]?[0-9]+(?:_[0-9]+)*\\b)|                     # .1E+3
+            (?:\\b[0-9]+(?:_[0-9]+)*[eE][+-]?[0-9]+(?:_[0-9]+)*\\b)|                        # 1E+3
+            (?:\\b[0-9]+(?:_[0-9]+)*\\.[0-9]+(?:_[0-9]+)*\\b)|                              # 1.1
+            (?:\\b[0-9]+(?:_[0-9]+)*\\.\\B)|                                                # 1.
+            (?:\\B\\.[0-9]+(?:_[0-9]+)*\\b)|                                                # .1
+            (?:\\b[0-9]+(?:_[0-9]+)*n?\\b(?!\\.))                                           # 1n
+          )(?!\\$)
+        '''
+    }
+    {
+      'name': 'constant.numeric'
+      'match': '\\b(?<!\\$)0(b|B)[01]+(?:_[01]+)*n?\\b(?!\\$)'
+    }
+    {
+      'name': 'constant.numeric'
+      'match': '\\b(?<!\\$)0(o|O)?[0-7]+(?:_[0-7]+)*n?\\b(?!\\$)'
+    }
+    {
+      'name': 'constant.numeric'
+      'match': '\\b(?<!\\$)0(x|X)[0-9a-fA-F]+(?:_[0-9a-fA-F]+)*n?\\b(?!\\$)'
+    }
+    {
+      'name': 'constant.boolean'
+      'match': '\\b(?i:(false|no|true|yes))\\b'
+    }
+
+    # keywords
+    {
+      'name': 'keyword.cfscript'
+      'match': '\\b(?i:(break|case|catch|continue|do|else|finally|for|if|in|rethrow|return|switch|this|throw|try|var|while|with))\\b'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '%=|\\+=|-=|\\*=|(?<!\\()/='
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '!=|<=|>=|==|<|>'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '&&|!!|!|\\|\\|'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '=|:'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '--'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '\\+\\+'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '%|\\*|/|-|\\+|&'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '\\b(?i:(and|eqv|imp|not|or|xor))\\b'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '\\b(?i:(and|eq|equal|greater|gt|gte|is|less|lt|lte|neq|than))\\b'
+    }
+    {
+      'name': 'keyword.operator.cfscript'
+      'match': '\\?|:'
+    }
+
+    # strings, including interpolated strings
+    # TODO: embedded SQL
+    {
+      'name': 'string.quoted.double.cfscript'
+      'begin': '"'
+      'end': '"'
+      'patterns': [
+        {
+          'name': 'markup.bold.cfscript'
+          'begin': '#'
+          'end': '#'
+        }
+      ]
+    }
+    {
+      'name': 'string.quoted.single.cfscript'
+      'begin': '\''
+      'end': '\''
+      'patterns': [
+        {
+          'name': 'markup.bold.cfscript'
+          'begin': '#'
+          'end': '#'
+        }
+      ]
+    }
+
+    # types (storage)
+    {
+      'name': 'storage.type.cfscript'
+      'match': '\\b(?i:(any|array|binary|boolean|component|date|function|guid|integer|null|numeric|query|string|struct|uuid|void|xml))\\b'
+    }
+
+    # modifiers
+    {
+      'name': 'storage.modifier.cfscript'
+      'match': '\\b(?i:(param|private|property|protected|public|required))\\b'
+    }
+
+    # ColdFusion scopes
+    {
+      'name': 'variable.language.scope.cfscript'
+      'match': '\\b(?i:(application|arguments|attributes|cgi|client|cookie|form|local|request|server|session|thread|url|variables))\\b'
+    }
+
+    # ColdFusion functions
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(abs|acos|addsoaprequestheader|addsoapresponseheader|ajaxlink|ajaxonload|applicationstarttime|applicationstop|array|arrayappend|arrayavg|arrayclear|arraycontains|arraycontainsnocase|arraydelete|arraydeleteat|arrayeach|arrayevery|arrayfilter|arrayfind|arrayfindall|arrayfindallnocase|arrayfindnocase|arrayfirst|arrayindexexists|arrayinsertat|arrayisdefined|arrayisempty|arraylast|arraylen|arraymap|arraymax|arraymedian|arraymerge|arraymid|arraymin|arraynew|arrayprepend|arrayreduce|arrayresize|arrayreverse|arrayset|arrayslice|arraysome|arraysort|arraysum|arrayswap|arraytolist|arraytostruct|asc|asin|atn))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(beat|binarydecode|binaryencode|bitand|bitmaskclear|bitmaskread|bitmaskset|bitnot|bitor|bitshln|bitshrn|bitxor))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(cacheclear|cachecount|cachedelete|cacheget|cachegetall|cachegetallids|cachegetdefaultcachename|cachegetmetadata|cachegetproperties|cacheidexists|cachekeyexists|cacheput|cacheremove|cacheremoveall|cachesetproperties|callstackdump|callstackget|canonicalize|ceiling|cfusion_decrypt|cfusion_encrypt|charsetdecode|charsetencode|chr|cjustify|collectioneach|collectionevery|collectionfilter|collectionmap|collectionreduce|collectionsome|compare|comparenocase|componentcacheclear|componentcachelist|componentinfo|compress|contains|containsnocase|contractpath|cos|createdate|createdatetime|createdynamicproxy|createguid|createobject|createodbcdate|createodbcdatetime|createodbctime|createtime|createtimespan|createuniqueid|createuuid|csrfgeneratetoken|csrfverifytoken|ctcacheclear|ctcachelist))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(datasourceflushmetacache|dateadd|datecompare|dateconvert|datediff|dateformat|datepart|datetimeformat|day|dayofweek|dayofweekasstring|dayofweekshortasstring|dayofyear|daysinmonth|daysinyear|de|decimalformat|decodefromurl|decrementvalue|decrypt|decryptbinary|delete|deleteat|deleteclientvariable|deserializejson|directorycopy|directorycreate|directorydelete|directoryexists|directorylist|directoryrename|dollarformat|dump|duplicate))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(each|echo|empty|encodeforcss|encodefordn|encodeforhtml|encodeforhtmlattribute|encodeforjavascript|encodeforldap|encodeforurl|encodeforxml|encodeforxmlattribute|encodeforxpath|encrypt|encryptbinary|entitydelete|entityload|entityloadbyexample|entityloadbypk|entitymerge|entitynamearray|entitynamelist|entitynew|entityreload|entitysave|entitytoquery|esapidecode|esapiencode|evaluate|exp|expandpath|extract))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(fileappend|fileclose|filecopy |filedelete|fileexists|filegetmimetype|fileiseof|filemove|fileopen|fileread|filereadbinary|filereadline|fileseek|filesetaccessmode|filesetattribute|filesetlastmodified|fileskipbytes|fileupload|fileuploadall|filewrite|filewriteline|filter|find|findnocase|findoneof|firstdayofmonth|fix|formatbasen))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(generatesecretkey|getapplicationmetadata|getapplicationsettings|getauthuser|getbasetagdata|getbasetaglist|getbasetemplatepath|getbuiltinfunction|getcanonicalpath|getclasspath|getclientvariableslist|getcomponentmetadata|getcontextroot|getcpuusage|getcurrentcontext|getcurrenttemplatepath|getdirectoryfrompath|getencoding|getfilefrompath|getfileinfo|getfreespace|getfunctioncalledname|getfunctiondata|getfunctionkeywords|getfunctionlist|gethttprequestdata|gethttptimestring|getk2serverdoccount|getk2serverdoccountlimit|getlocale|getlocaledisplayname|getlocalhostip|getluceeid|getmemoryusage|getmetadata|getmetricdata|getnumericdate|getpagecontext|getprinterlist|getprofilesections|getprofilestring|getreadableimageformats|getsoaprequest|getsoaprequestheader|getsoapresponse|getsoapresponseheader|getsystemfreememory|getsystemtotalmemory|gettagdata|gettaglist|gettempdirectory|gettempfile|gettemplatepath|gettickcount|gettimezone|gettimezoneinfo|gettoken|gettotalspace|getuserroles|getvariable|getvfsmetadata|getwriteableimageformats))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(hash|hash40|hmac|hour|htmlcodeformat|htmleditformat|htmlparse))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(iif|imageaddborder|imageblur|imageclearrect|imagecopy|imagecrop|imagedrawarc|imagedrawbeveledrect|imagedrawcubiccurve|imagedrawimage|imagedrawline|imagedrawlines|imagedrawoval|imagedrawpoint|imagedrawquadraticcurve|imagedrawrect|imagedrawroundrect|imagedrawtext|imagefilter|imagefiltercolormap|imagefiltercurves|imagefilterkernel|imagefilterwarpgrid|imageflip|imagefonts|imageformats|imagegetblob|imagegetbufferedimage|imagegetexifmetadata|imagegetexiftag|imagegetheight|imagegetiptctag|imagegetwidth|imagegrayscale|imageinfo|imagenegative|imagenew|imageoverlay|imagepaste|imageread|imagereadbase64|imageresize|imagerotate|imagerotatedrawingaxis|imagescaletofit|imagesetantialiasing|imagesetbackgroundcolor|imagesetdrawingalpha|imagesetdrawingcolor|imagesetdrawingstroke|imagesetdrawingtransparency|imagesharpen|imageshear|imagesheardrawingaxis|imagetranslate|imagetranslatedrawingaxis|imagewrite|imagewritebase64|imagexordrawingmode|incrementvalue|inputbasen|insert|insertat|int|invoke|isarray|isbinary|isboolean|isclosure|iscustomfunction|isdate|isdebugmode|isdefined|isempty|isimage|isimagefile|isinstanceof|isipinrange|isipv6|isjson|isleapyear|islocalhost|isnotmap|isnull|isnumeric|isnumericdate|isobject|ispdfobject|isquery|issimplevalue|issoaprequest|isstruct|isuserinanyrole|isuserinrole|isuserloggedin|isvalid|isvideofile|iswddx|isxml|isxmlattribute|isxmldoc|isxmlelem|isxmlnode|isxmlroot|iszipfile))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(javacast|jsstringformat))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(lcase|left|len|listappend|listavg|listchangedelims|listcompact|listcontains|listcontainsnocase|listdeleteat|listeach|listevery|listfilter|listfind|listfindnocase|listfirst|listgetat|listindexexists|listinsertat|listitemtrim|listlast|listlen|listmap|listprepend|listqualify|listreduce|listremoveduplicates|listrest|listsetat|listsome|listsort|listtoarray|listtrim|listvaluecount|listvaluecountnocase|ljustify|location|log|log10|lscurrencyformat|lsdateformat|lsdatetimeformat|lsdayofweek|lseurocurrencyformat|lsiscurrency|lsisdate|lsisnumeric|lsnumberformat|lsparsecurrency|lsparsedatetime|lsparseeurocurrency|lsparsenumber|lstimeformat|lsweek|ltrim))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(map|max|metaphone|mid|millisecond|min|minute|month|monthasstring|monthshortasstring))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(newline|now|nowserver|nullvalue|numberformat))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(objectequals|objectload|objectsave|ormclearsession|ormcloseallsessions|ormclosesession|ormevictcollection|ormevictentity|ormevictqueries|ormexecutequery|ormflush|ormgetsession|ormgetsessionfactory|ormreload))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(pagepoolclear|pagepoollist|paragraphformat|parameterexists|parsedatetime|parsenumber|pi|precisionevaluate|preservesinglequotes))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(quarter|query|queryaddcolumn|queryaddrow|querycolumnarray|querycolumncount|querycolumndata|querycolumnexists|querycolumnlist|queryconvertforgrid|querycurrentrow|querydeletecolumn|querydeleterow|queryeach|queryevery|queryexecute|queryfilter|querygetcell|querygetrow|querymap|querynew|queryrecordcount|queryreduce|queryrowdata|querysetcell|queryslice|querysome|querysort|quotedvaluelist))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(rand|randomize|randrange|recordcount|reduce|refind|refindnocase|releasecomobject|rematch|rematchnocase|removechars|repeatstring|replace|replacelist|replacenocase|rereplace|rereplacenocase|restdeleteapplication|restinitapplication|restsetresponse|reverse|right|rjustify|round|rtrim))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(second|sendgatewaymessage|serialize|serializejson|sessioninvalidate|sessionrotate|sessionstarttime|setencoding|setlocale|setprofilestring|settimezone|setvariable|sgn|sin|sizeof|sleep|soundex|spanexcluding|spanincluding|spreadsheetnew|spreadsheetsetcellvalue|spreadsheetwrite|sqr|sslcertificateinstall|sslcertificatelist|storeaddacl|storegetacl|storesetacl|stringlen|stripcr|structappend|structclear|structcopy|structcount|structdelete|structeach|structevery|structfilter|structfind|structfindkey|structfindvalue|structget|structinsert|structisempty|structkeyarray|structkeyexists|structkeylist|structkeytranslate|structmap|structnew|structreduce|structsome|structsort|structupdate|systemcacheclear|systemoutput))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(tan|threadjoin|threadterminate|throw|timeformat|tobase64|tobinary|tonumeric|toscript|tostring|trace|transactioncommit|transactionrollback|transactionsetsavepoint|trim|truefalseformat))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(ucase|ucfirst|unserializejava|urldecode|urlencode|urlencodedformat|urlsessionformat))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(val|valuearray|valuelist|verifyclient))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(week|wrap|writebase64|writedump|writelog|writeoutput))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(xmlchildpos|xmlelemnew|xmlformat|xmlgetnodetype|xmlnew|xmlparse|xmlsearch|xmltransform|xmlvalidate))\\b'
+    }
+    {
+      'name': 'meta.support.cfscript'
+      'match': '\\b(?i:(year|yesnoformat))\\b'
+    }
+
+]
