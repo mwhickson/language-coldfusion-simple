@@ -8,6 +8,10 @@ A simple/barebones ColdFusion grammar for the Atom editor.
 * fast
 * semantically correct, to support other features of the grammar
 
+## TODO
+
+* clean up
+
 ## Reference Projects
 
 * **Creating a Legacy TextMate Grammar** - including sample JavaScript and HTML grammars
@@ -21,4 +25,10 @@ A simple/barebones ColdFusion grammar for the Atom editor.
 
 ## Screenshot
 
-![sample screenshot](screenshot.png)
+### cfscript Grammar
+
+![cfscript screenshot](screenshot.png)
+
+### cfml Grammar
+
+![cfml screenshot](screenshot-2.png)

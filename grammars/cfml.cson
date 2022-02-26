@@ -1,0 +1,142 @@
+'scopeName': 'source.cfml'
+'name': 'cfml'
+'fileTypes': [
+  'cfm'
+  'cfml'
+]
+'patterns': [
+
+  # comments
+  {
+    'name': 'comment.block.cfml'
+    'begin': '<!---'
+    'end': '---\\s*>'
+  }
+  {
+    'name': 'comment.block.cfml'
+    'begin': '<!--'
+    'end': '--\\s*>'
+  }
+
+  # tags
+  {
+    'name': 'meta.tag.inline.cfml'
+    'begin': '(?i)(</?)(a|abbr|acronym|area|b|base|basefont|bdo|big|br|button|caption|cite|code|col|colgroup|del|dfn|div|em|font|form|h1|h2|h3|h4|h5|h6|head|html|i|img|input|ins|isindex|kbd|label|legend|li|link|map|meta|nav|noscript|optgroup|option|p|param|q|s|samp|script|section|select|small|span|strike|strong|style|sub|sup|table|tbody|td|textarea|tfoot|th|thead|title|tr|tt|u|var)(?=\\s|/?>)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.definition.tag.begin.cfml'
+      '2':
+        'name': 'entity.name.tag.inline.cfml'
+    'end': '((?: ?/)?>)'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.tag.end.cfml'
+    'patterns': [
+      {
+        'include': '#tag-attributes'
+      }
+      {
+        'include': '#strings'
+      }
+    ]
+  }
+
+  # ColdFusion tags
+  {
+    'name': 'meta.tag.inline.cfml'
+    'begin': '(?i)(</?)(cfelse|cfif|cfloop|cfoutput|cfset|cfscript)(?=\\s|/?>)'
+    'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.tag.begin.cfml'
+          '2':
+            'name': 'entity.name.tag.inline.cfml'
+    'end': '((?: ?/)?>)'
+    'endCaptures':
+          '1':
+            'name': 'punctuation.definition.tag.end.cfml'
+    'patterns': [
+      {
+        'include': '#tag-attributes'
+      }
+      {
+        'include': '#strings'
+      }
+      {
+        'include': '#cfscript'
+      }
+    ]
+  }
+
+  {
+    'include': '#strings'
+  }
+]
+'repository':
+
+  # strings, including interpolated strings
+  'strings':
+    'patterns': [
+      {
+        'name': 'string.quoted.double.cfml'
+        'begin': '"'
+        'end': '"'
+        'patterns': [
+          {
+            'name': 'markup.bold.cfml'
+            'begin': '#'
+            'end': '#'
+          }
+        ]
+      }
+      {
+        'name': 'string.quoted.single.cfml'
+        'begin': '\''
+        'end': '\''
+        'patterns': [
+          {
+            'name': 'markup.bold.cfml'
+            'begin': '#'
+            'end': '#'
+          }
+        ]
+      }
+      {
+        'name': 'markup.bold.cfml'
+        'begin': '#'
+        'end': '#'
+      }
+      {
+        'include': '#scopes'
+      }
+  ]
+
+  # attributes
+  'tag-attributes':
+    {
+      'name': 'meta.attribute-with-value.cfml'
+      'begin': '([^\\s/=>"\'<]+)\\s*(=)\\s*'
+      'beginCaptures':
+        '1':
+          'name': 'entity.other.attribute-name.cfml'
+        '2':
+          'name': 'punctuation.separator.key-value.cfml'
+      'end': '(?!\\G)|(?=\\s|/?>)'
+      'patterns': [
+        {
+          'include': '#strings'
+        }
+      ]
+    }
+
+  # ColdFusion scopes
+  'scopes':
+    {
+      'name': 'variable.language.scope.cfml'
+      'match': '\\b(?i:(application|arguments|attributes|cgi|client|cookie|form|local|request|server|session|thread|url|variables))(\\.+)\\b'
+    }
+
+  # cfscript
+  'cfscript':
+    {
+      'include': 'cfscript'
+    }
